@@ -34,11 +34,13 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
  *
  */
 
-const TerserPlugin = require('terser-webpack-plugin')
+// const TerserPlugin = require('terser-webpack-plugin')
 
 module.exports = {
-  mode: 'development',
   entry: './src/index.ts',
+  output: {
+    filename: 'bundle.js',
+  },
 
   plugins: [
     new webpack.ProgressPlugin(),
@@ -51,7 +53,7 @@ module.exports = {
     contentBase: path.join(__dirname, 'dist'),
     host: 'localhost',
     port: 4050,
-    open: true,
+    open: false,
   },
 
   module: {
@@ -96,7 +98,8 @@ module.exports = {
   },
 
   optimization: {
-    minimizer: [new TerserPlugin()],
+    minimize: true,
+    // minimizer: [new TerserPlugin()],
 
     splitChunks: {
       cacheGroups: {
